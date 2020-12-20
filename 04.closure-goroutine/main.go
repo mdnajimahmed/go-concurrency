@@ -37,9 +37,9 @@ func testGoClousureScoped() {
 	fmt.Println("Finished execution! num = ", num)
 }
 
-func main() {
-	w.Add(1)
-	// testGoClousure()
-	testGoClousureScoped()
-	w.Wait()
-}
+// func main() {
+// 	w.Add(1)
+// 	// testGoClousure()
+// 	testGoClousureScoped()
+// 	w.Wait()
+// }
