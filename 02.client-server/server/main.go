@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net"
 	"time"
@@ -27,9 +28,14 @@ func main() {
 }
 
 func streamMovie(conn net.Conn) {
+	defer conn.Close()
 	fmt.Println("Found a client")
-	movieName := make([]byte, 1024)
-	conn.Read(movieName)
+	movieNameBytes, err := ioutil.ReadAll(conn)
+	if err != nil {
+		fmt.Println("Error reading bytes fromn client", err)
+	}
+	movieName := string(movieNameBytes)
+	fmt.Println("Received movie name", movieName)
 	//broadcasting movie from my server
 	for {
 		n, e := io.WriteString(conn,
